@@ -1,0 +1,128 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: 22px Menlo, monospace;
+}
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+html {
+    background: transparent;
+}
+a, a:visited, a:active {
+    color: #888;
+    text-decoration: none;
+}
+a:hover {
+    color: #aaa;
+    text-decoration: underline;
+}
+#dm-main{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: 22px "微软雅黑","黑体";
+    background-color:rgba(0,0,0,0.5);
+}
+#dm-screen {
+    color: #888;
+}
+#dm-info {
+    padding: 10px;
+    border-radius: 3px;
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 100000;
+    color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+#sender{
+    width:370px;
+    padding: 10px;
+    border-radius: 3px;
+    display: block;
+    position: absolute;
+    left: 40%;
+    top:0px;
+    z-index: 100000;
+    color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 0.2);
+    display: none;
+}
+#error{
+    padding: 10px;
+    border-radius: 3px;
+    display: block;
+    position: absolute;
+    left: 0px;
+    bottom:0px;
+    z-index: 100000;
+    color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 0.2);
+    font: 18px "微软雅黑","黑体";
+    color: red;
+    display: none;
+}
+#textbox{
+    height:20px;
+    padding:3px;
+    float:right;
+    border-radius: 3px;
+    z-index: 100000;
+    color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 1);
+}
+input[type=text]{
+    border: 0px solid;
+    font-size:18px ;
+}
+input[type=checkbox] {
+	visibility: hidden;
+}
+.color-box {
+	float:left;
+	width:25px;
+	height:25px;
+	border: 1px solid white;
+}
+#checkbox {
+    font: 14px "微软雅黑","黑体";
+    margin-left: 7px;
+    float:left;
+    z-index: 100000;
+	width: 50px;
+    height: 27px;
+	border-radius: 10px;
+    display:block;
+}
+.be{
+    background: royalblue;
+}
+.new{
+    background: indianred;
+}
+.be:before{
+    content: "滚动";
+    position: absolute;
+    left: 55px;
+    bottom: 15px;
+    z-index: 100000;
+}
+.new:before{
+    content: "固定";
+    position: absolute;
+    left: 55px;
+    bottom: 15px;
+    z-index: 100000;
+}
+#damoo{
+    width:100%;
+    float:left;
+    height:100%;
+    outline:none;
+}
