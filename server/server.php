@@ -10,8 +10,8 @@ $server->on('open', function (swoole_websocket_server $server, $request) {
     $ip = $server->connection_info($request->fd)['remote_ip'];
     $bannedArr = explode("\n", file_get_contents("banned_ip.list"));
     if (in_array($ip, $bannedArr)) {
-        echo "Banned ip {$ip} tried to connect but refused\n";
-        $server->close($request->fd, true);
+        echo "Banned ip {$ip} tried to connect\n";
+        $server->push($request->fd, '{"text":"SYS:你被封了","fixed":true}');
         return;
     }
     echo "Handshake success with {$ip} using fd{$request->fd}\n";
@@ -20,15 +20,16 @@ $server->on('open', function (swoole_websocket_server $server, $request) {
 $server->on('message', function (swoole_websocket_server $server, $frame) {
     $bannedArr = explode("\n", file_get_contents("banned_ip.list"));
     $ip = $server->connection_info($frame->fd)['remote_ip'];
+    $content = json_decode($frame->data);
     if (in_array($ip, $bannedArr)) {
         echo "Recived a message from banned ip {$ip} with data '{$frame->data}' and dropped it\n";
-        $server->push($frame->fd, "F**K, YOU ARE BANNED!hahaha");
+        $server->push($frame->fd, '{"text":"SYS:你被封了，现在没法发消息","fixed":true}');
         return;
     }
-    if ($frame->data == null) {
+    if ($content->text == null) {
         return;
     }
-    if (strlen($frame->data) > 150) {
+    if (strlen($content->text) > 150) {
         return;
     }
     echo "Receive from {$ip} with data '{$frame->data}'\n";

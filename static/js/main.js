@@ -3,16 +3,16 @@ var color;
 var click=false;
 
 // yq WebSocket qy
-var ws = new WebSocket("ws://192.168.0.190:1919");
+var ws = new WebSocket("ws://10.111.40.235:1919");
 
 ws.onopen = function(){
     console.log("握手成功");
     //ws.send('LoGiN2000919');
 };
 ws.onmessage = function(e){
-    var jj = e.data;
-    //console.log(text);
-    damoo.emit(JSON.parse(jj));
+    console.log(e);
+    var content = JSON.parse(e.data);
+    damoo.emit({ text: content.name + " 说 " + content.text, color: content.color, fixed: content.fixed});
 };
 // yq end qy
 
@@ -65,7 +65,7 @@ var addEvent = function(obj, nm, cb) {
     }
 };
 
-damoo.emit({ text: "SYS:欢迎~", color: "#" + Math.random().toString(16).substring(2).substring(0, 6) });
+damoo.emit({ text: "SYS:欢迎~输入名字后点击空白区域按回车即可发送", color: "#" + Math.random().toString(16).substring(2).substring(0, 6) });
 
 addEvent(document.body, "keypress", function(e) {
     var keyCode = e.keyCode || e.which;
@@ -83,8 +83,7 @@ addEvent(document.body, "keypress", function(e) {
                 }else{
                     var text=document.getElementById("damoo").value;
                     document.getElementById("damoo").value="";
-                    alert(color);
-                    ws.send(JSON.stringify({ text: name+":"+text, color: color, fixed: click}));
+                    ws.send(JSON.stringify({ text: text,name: name, color: color, fixed: click}));
                     //damoo.emit({ text: name+":"+text, color: color, fixed: click});
                     $("#sender").fadeOut(1000);
                     isshowinput=false;
@@ -106,17 +105,17 @@ addEvent(document.body, "keypress", function(e) {
 });
 
 //取色器
-
 $('.color-box').colpick({
 	colorScheme:'light',
 	layout:'hex',
 	color:'ffffff',
-	onSubmit:function(hsb,hex,rgb,el) {
+    submit:0,
+	onChange:function(hsb,hex,rgb,el) {
         color='#'+hex;
 		$(el).css('background-color', '#'+hex);
-		$(el).colpickHide();
 	}
 }).css('background-color', '#ffffff');
+
 
 //
 $("#checkbox").click(function(){

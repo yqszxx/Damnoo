@@ -25,7 +25,7 @@ a:hover {
     padding: 0;
     border: 0;
     font: 22px "微软雅黑","黑体";
-    background-color:rgba(0,0,0,0.5);
+    /*background-color:rgba(0,0,0,0.5);*/
 }
 #dm-screen {
     color: #888;
